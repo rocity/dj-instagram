@@ -3,6 +3,7 @@
 Django Development Practice - Instagram Clone
 
 - Django 1.9
+- [Schema](https://github.com/Vheissu/Open-Source-Database-Schemas/blob/master/vheissu-instagram-schema.md)
 
 # Licensing
 
