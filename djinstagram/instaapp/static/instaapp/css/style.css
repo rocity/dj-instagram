@@ -1,0 +1,17 @@
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+#content {
+  flex: 1;
+}
+
+footer {
+    height: 80px;
+    border-top: 1px solid #999;
+    background: #eee;
+    text-align: center;
+    padding-top: 25px;
+}
