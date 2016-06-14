@@ -16,6 +16,9 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
+from instaapp import views
+
 urlpatterns = [
+    url(r'^$', views.index, name='instaindex'),
     url(r'^admin/', admin.site.urls),
 ]
