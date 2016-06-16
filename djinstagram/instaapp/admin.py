@@ -7,7 +7,7 @@ class PhotoAdmin(admin.ModelAdmin):
     '''
         Admin View for Photo
     '''
-    list_display = ('owner', 'caption', 'path', 'created')
+    list_display = ('owner', 'caption', 'created')
 
 admin.site.register(Photo, PhotoAdmin)
 admin.site.register(Like)

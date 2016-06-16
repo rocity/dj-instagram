@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
 
-from .forms import LoginForm
+from .forms import LoginForm, PhotoForm
 
 def index(request):
     return render(request, 'instaapp/index.html', {})
@@ -26,3 +26,7 @@ def user_login(request):
         form = LoginForm()
 
     return render(request, 'instaapp/login.html', {'form': form})
+
+def upload_photo(request):
+    form = PhotoForm()
+    return render(request, 'instaapp/upload_photo.html', {'form': form})

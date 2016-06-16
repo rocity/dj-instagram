@@ -1,0 +1,11 @@
+{% load staticfiles %}
+{% include 'instaapp/includes/head.html' %}
+{% include 'instaapp/includes/nav.html' %}
+<div id="content" class="container">
+    <div class="col-sm-6 col-sm-offset-3">
+        <h1>Upload a Photo</h1>
+        {{form.as_p}}
+    </div>
+
+</div>
+{% include 'instaapp/includes/foot.html' %}
