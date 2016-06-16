@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
+from django.core import serializers
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
@@ -42,4 +43,12 @@ def upload_photo(request):
     return render(request, 'instaapp/upload_photo.html', {'form': form})
 
 def users(request):
-    return render(request, 'instaapp/users.html', {})
+    users = User.objects.all()
+    return render(request, 'instaapp/users.html', {'users': users})
+
+def follow_user(request):
+    data = {
+        'status': 1
+    }
+    data = serializers.serialize('json', data)
+    return HttpResponse(data, content_type='application/json')
