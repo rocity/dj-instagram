@@ -14,6 +14,7 @@ class Photo(models.Model):
     owner = models.ForeignKey(User, null=True)
     caption = models.TextField(max_length=255)
     path = models.TextField(max_length=255)
+    image = models.ImageField(null=True)
     tags = models.ManyToManyField(Tag)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
