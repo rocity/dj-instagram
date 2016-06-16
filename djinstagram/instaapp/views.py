@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -29,4 +30,13 @@ def user_login(request):
 
 def upload_photo(request):
     form = PhotoForm()
+
+    if request.method == 'POST':
+        form = PhotoForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/insta/upload')
+    else:
+        form = PhotoForm()
+
     return render(request, 'instaapp/upload_photo.html', {'form': form})

@@ -13,13 +13,13 @@ class Tag(models.Model):
 class Photo(models.Model):
     owner = models.ForeignKey(User, null=True)
     caption = models.TextField(max_length=255)
-    image = models.ImageField(null=True)
+    image = models.ImageField(upload_to="instapp/uploads/photos", null=True)
     tags = models.ManyToManyField(Tag)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.image
+        return self.caption
 
 class Like(models.Model):
     owner = models.ForeignKey(User, null=True)

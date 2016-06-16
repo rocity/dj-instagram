@@ -17,3 +17,9 @@ class PhotoForm(forms.ModelForm):
     class Meta:
         model = Photo
         fields = ('image', 'caption')
+        widgets = {
+            'caption': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 3
+                })
+        }
