@@ -4,6 +4,10 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
+class Follow(models.Model):
+    follower = models.ForeignKey(User, True)
+    following = models.ForeignKey(User, True)
+
 class Tag(models.Model):
     name = models.TextField(max_length=255)
 
