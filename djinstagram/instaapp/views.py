@@ -1,13 +1,15 @@
+import json
+
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-from django.core import serializers
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 
-# Create your views here.
-
 from .forms import LoginForm, PhotoForm
+from .models import Follow
+
+# Create your views here.
 
 def index(request):
     return render(request, 'instaapp/index.html', {})
@@ -48,7 +50,16 @@ def users(request):
 
 def follow_user(request):
     data = {
-        'status': 1
+        'status': 1,
+        'follower': request.user.id,
+        'to_follow': request.POST['uid']
     }
-    data = serializers.serialize('json', data)
+    if request.method == 'POST':
+        follower = User.objects.get(pk=request.user.id)
+        following = User.objects.get(pk=request.POST['uid'])
+
+        follow = Follow(follower=follower, following=following)
+        follow.save()
+
+    data = json.dumps(data)
     return HttpResponse(data, content_type='application/json')

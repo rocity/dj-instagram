@@ -7,6 +7,8 @@ from django.contrib.auth.models import User
 class Follow(models.Model):
     follower = models.ForeignKey(User, related_name='+', null=True)
     following = models.ForeignKey(User,  related_name='+', null=True)
+    active = models.BooleanField(default=True)
+    created = models.DateTimeField(auto_now_add=True)
 
 class Tag(models.Model):
     name = models.TextField(max_length=255)
