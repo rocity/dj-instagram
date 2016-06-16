@@ -1,0 +1,18 @@
+{% load staticfiles %}
+{% include 'instaapp/includes/head.html' %}
+{% include 'instaapp/includes/nav.html' %}
+<div id="content" class="container">
+    <div class="col-sm-6 col-sm-offset-3 users-list">
+        <h1>Users to Follow</h1>
+        <div class="well user-card">
+            <img
+                src="{% static "instaapp/img/50avatar.jpg" %}"
+                alt="user avatar"
+                class="responsive img-circle">
+            <span>User's Name <small>@username</small></span>
+            <button class="btn btn-success pull-right">Follow</button>
+        </div>
+    </div>
+
+</div>
+{% include 'instaapp/includes/foot.html' %}

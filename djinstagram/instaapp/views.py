@@ -40,3 +40,6 @@ def upload_photo(request):
         form = PhotoForm()
 
     return render(request, 'instaapp/upload_photo.html', {'form': form})
+
+def users(request):
+    return render(request, 'instaapp/users.html', {})

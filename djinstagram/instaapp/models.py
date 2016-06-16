@@ -5,8 +5,8 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class Follow(models.Model):
-    follower = models.ForeignKey(User, True)
-    following = models.ForeignKey(User, True)
+    follower = models.ForeignKey(User, related_name='+', null=True)
+    following = models.ForeignKey(User,  related_name='+', null=True)
 
 class Tag(models.Model):
     name = models.TextField(max_length=255)
@@ -17,7 +17,7 @@ class Tag(models.Model):
 class Photo(models.Model):
     owner = models.ForeignKey(User, null=True)
     caption = models.TextField(max_length=255)
-    image = models.ImageField(upload_to="instapp/uploads/photos", null=True)
+    image = models.ImageField(upload_to="uploads/photos", null=True)
     tags = models.ManyToManyField(Tag)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
