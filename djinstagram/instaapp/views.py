@@ -48,6 +48,13 @@ def users(request):
     users = User.objects.all()
     return render(request, 'instaapp/users.html', {'users': users})
 
+def user_following(request):
+    user = request.user
+    user_obj = User.objects.get(pk=user.id)
+
+    following = Follow.objects.filter(follower__pk=user.id)
+    return render(request, 'instaapp/user_following.html', {'following': following})
+
 def follow_user(request):
     data = {
         'status': 1,

@@ -10,6 +10,9 @@ class Follow(models.Model):
     active = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return self.following.username
+
 class Tag(models.Model):
     name = models.TextField(max_length=255)
 
