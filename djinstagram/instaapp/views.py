@@ -50,10 +50,19 @@ def users(request):
 
 def user_following(request):
     user = request.user
-    user_obj = User.objects.get(pk=user.id)
 
     following = Follow.objects.filter(follower__pk=user.id)
-    return render(request, 'instaapp/user_following.html', {'following': following})
+    return render(request, 'instaapp/user_following.html', {
+        'following': following
+        })
+
+def user_followers(request):
+    user = request.user
+
+    followers = Follow.objects.filter(following__pk=user.id)
+    return render(request, 'instaapp/user_followers.html', {
+        'followers': followers
+        })
 
 def follow_user(request):
     data = {

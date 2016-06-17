@@ -10,4 +10,5 @@ urlpatterns = [
     url(r'^users/$', views.users, name='users'),
     url(r'^follow/$', views.follow_user, name='follow_user'),
     url(r'^following/$', views.user_following, name='user_following'),
+    url(r'^followers/$', views.user_followers, name='user_followers'),
 ]

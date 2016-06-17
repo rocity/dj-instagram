@@ -1,0 +1,28 @@
+{% load staticfiles %}
+{% include 'instaapp/includes/head.html' %}
+{% include 'instaapp/includes/nav.html' %}
+<div id="content" class="container">
+    <div class="col-sm-6 col-sm-offset-3 users-list">
+        <h1>Users who Follow you</h1>
+        {% if followers %}
+            {% for user in followers %}
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="well">
+                            <img class="img-circle" src="{% static "instaapp/img/30avatar.png" %}" alt="following avatar">
+                            <span>{{user.follower}}</span>
+                            <button class="btn btn-success pull-right">
+                                <span class="glyphicon glyphicon-plus"></span>
+                                Follow
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="alert alert-info">You have no followers yet.</div>
+        {% endif %}
+    </div>
+</div>
+{% include 'instaapp/includes/foot.html' %}
+<script src="{% static "instaapp/js/follow.js" %}"></script>
