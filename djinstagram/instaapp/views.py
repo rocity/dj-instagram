@@ -1,4 +1,4 @@
-import json
+import json, itertools
 
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
@@ -13,6 +13,25 @@ from .models import Follow, Photo
 
 def index(request):
     return render(request, 'instaapp/index.html', {})
+
+
+def feed(request):
+    user = request.user
+    photos = []
+    user_following = Follow.objects.filter(follower__id=user.id)
+
+    for user_object in user_following:
+        following_photos = Photo.objects.filter(owner__id=user_object.following.id)
+        if following_photos is not None:
+            photos.append(following_photos)
+
+    # flatten list of photos
+    chain = itertools.chain(*photos)
+    photos = list(chain)
+
+    return render(request, 'instaapp/feed.html', {
+        'photos': photos
+        })
 
 def user_login(request):
     form = LoginForm()
