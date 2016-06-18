@@ -7,7 +7,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 
 from .forms import LoginForm, PhotoForm
-from .models import Follow
+from .models import Follow, Photo
 
 # Create your views here.
 
@@ -32,12 +32,16 @@ def user_login(request):
     return render(request, 'instaapp/login.html', {'form': form})
 
 def upload_photo(request):
+    uploader = request.user
     form = PhotoForm()
 
     if request.method == 'POST':
         form = PhotoForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            obj = form.save(commit=False)
+            obj.owner = uploader
+            obj.save()
+
             return HttpResponseRedirect('/insta/upload')
     else:
         form = PhotoForm()
