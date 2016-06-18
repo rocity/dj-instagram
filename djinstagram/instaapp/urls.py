@@ -11,4 +11,5 @@ urlpatterns = [
     url(r'^follow/$', views.follow_user, name='follow_user'),
     url(r'^following/$', views.user_following, name='user_following'),
     url(r'^followers/$', views.user_followers, name='user_followers'),
+    # url(r'^feed/$', views.feed, name='feed'),
 ]

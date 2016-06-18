@@ -1,0 +1,18 @@
+{% load staticfiles %}
+{% include 'instaapp/includes/head.html' %}
+{% include 'instaapp/includes/nav.html' %}
+<div id="content" class="container">
+    <div class="col-sm-6 col-sm-offset-3">
+        <h1>Feed</h1>
+        <ul>
+            {% for user in uf %}
+                <li>{{user.following}}</li>
+            {% endfor %}
+        </ul>
+        <hr>
+        {{photos}}
+    </div>
+
+</div>
+{% include 'instaapp/includes/foot.html' %}
+<script src="{% static "instaapp/js/follow.js" %}"></script>
