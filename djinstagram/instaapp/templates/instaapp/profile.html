@@ -1,0 +1,26 @@
+{% load staticfiles %}
+{% include 'instaapp/includes/head.html' %}
+{% include 'instaapp/includes/nav.html' %}
+<div id="content" class="container">
+    <div class="col-sm-6 col-sm-offset-3">
+        <div class="row">
+            <div class="col-sm-4">
+                <img src="https://www.wired.com/wp-content/uploads/2015/09/10093860866_803211264e_o.jpg" alt="profile image" class="img-responsive img-rounded">
+            </div>
+            <div class="col-sm-8">
+                <h1>@{{user.username}} <small>{{user.first_name}} {{user.last_name}}</small></h1>
+                <span>{{count}} posts</span>
+            </div>
+        </div>
+        <div class="row">
+            <hr>
+            {% for photo in photos %}
+                <div class="col-sm-3">
+                    <img class="img-responsive img-rounded" src="{{ MEDIA_URL }}{{photo.image.url}}" alt="{{photo.caption}}" title="{{photo.caption}}"/>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+</div>
+{% include 'instaapp/includes/foot.html' %}
