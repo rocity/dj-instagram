@@ -67,8 +67,11 @@ def upload_photo(request):
 
     return render(request, 'instaapp/upload_photo.html', {'form': form})
 
-def user_profile(request):
-    user = request.user
+def user_profile(request, username=None):
+    if username is None:
+        user = request.user
+    else:
+        user = User.objects.get(username=username)
 
     user_photos = Photo.objects.filter(owner__pk=user.id)
     photos_count = user_photos.count()
