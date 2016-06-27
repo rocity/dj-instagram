@@ -35,7 +35,26 @@
 
             <ul class="nav navbar-nav navbar-right">
                 {% if user.is_authenticated %}
-                    <li><a href="{% url 'instaapp:user_profile' %}">{{user.username}}</a></li>
+
+                    <li class="dropdown">
+                        <a
+                            href="#"
+                            class="dropdown-toggle"
+                            data-toggle="dropdown"
+                            role="button"
+                            aria-haspopup="true"
+                            aria-expanded="false">{{user.username}} <span class="caret"></span></a>
+
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="{% url 'instaapp:user_profile' %}">Profile</a>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li>
+                                <a href="{% url 'instaapp:user_logout' %}">Logout</a>
+                            </li>
+                        </ul>
+                    </li>
                 {% else %}
                     <li>
                         <a href="{% url 'instaapp:user_login' %}">Login</a>

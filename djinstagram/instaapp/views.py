@@ -50,6 +50,10 @@ def user_login(request):
 
     return render(request, 'instaapp/login.html', {'form': form})
 
+def user_logout(request):
+    logout(request)
+    return HttpResponseRedirect('/insta/login')
+
 def upload_photo(request):
     uploader = request.user
     form = PhotoForm()

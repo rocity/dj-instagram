@@ -4,27 +4,34 @@
 <div id="content" class="container">
     <div class="col-sm-6 col-sm-offset-3">
         <h1>Feed</h1>
-        {% for photo in photos %}
-            <div class="panel panel-default panel-post">
-                <div class="panel-heading">
-                    <img src="https://qph.is.quoracdn.net/main-thumb-7749827-50-wgtbetbrxruarmovvkasqtvgmlkuzbvk.jpeg" alt="avatar" class="img-circle">
-                    <span class="panel-title">{{photo.owner.username}}</span>
-                    <span class="pull-right">{{photo.created|timesince}}</span>
+        {% if photos %}
+            {% for photo in photos %}
+                <div class="panel panel-default panel-post">
+                    <div class="panel-heading">
+                        <img src="https://qph.is.quoracdn.net/main-thumb-7749827-50-wgtbetbrxruarmovvkasqtvgmlkuzbvk.jpeg" alt="avatar" class="img-circle">
+                        <span class="panel-title">{{photo.owner.username}}</span>
+                        <span class="pull-right">{{photo.created|timesince}}</span>
+                    </div>
+                    <div class="panel-body">
+                        <img src="{{ MEDIA_URL }}{{photo.image.url}}" alt="post" />
+                    </div>
+                    <div class="panel-footer">
+                        <p><strong>999</strong> likes</p>
+                        <p>
+                            <strong>{{photo.owner.username}}</strong>
+                            &nbsp;{{photo.caption}}
+                        </p>
+                        <hr />
+                        <span class="glyphicon glyphicon-heart"></span>&nbsp;Write a comment... <span class="pull-right glyphicon glyphicon-option-horizontal"></span>
+                    </div>
                 </div>
-                <div class="panel-body">
-                    <img src="{{ MEDIA_URL }}{{photo.image.url}}" alt="post" />
-                </div>
-                <div class="panel-footer">
-                    <p><strong>999</strong> likes</p>
-                    <p>
-                        <strong>{{photo.owner.username}}</strong>
-                        &nbsp;{{photo.caption}}
-                    </p>
-                    <hr />
-                    <span class="glyphicon glyphicon-heart"></span>&nbsp;Write a comment... <span class="pull-right glyphicon glyphicon-option-horizontal"></span>
-                </div>
+            {% endfor %}
+        {% else %}
+            <div class="alert alert-info">
+                You are not following any users. <a href="{% url 'instaapp:users' %}">Follow</a> users to view photos.
             </div>
-        {% endfor %}
+        {% endif %}
+
     </div>
 
 </div>
