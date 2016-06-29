@@ -93,6 +93,7 @@ def user_following(request):
     user = request.user
 
     following = Follow.objects.filter(follower__pk=user.id)
+
     return render(request, 'instaapp/user_following.html', {
         'following': following
         })
@@ -101,8 +102,20 @@ def user_followers(request):
     user = request.user
 
     followers = Follow.objects.filter(following__pk=user.id)
+
+    # Check if you follow the users who follow you
+    for follow in followers:
+        following = Follow.objects.filter(
+            follower__pk=user.id,
+            following__pk=follow.pk)
+
+        if following:
+            follow.mutual_follow = True
+        else:
+            follow.mutual_follow = False
+
     return render(request, 'instaapp/user_followers.html', {
-        'followers': followers
+        'followers': followers,
         })
 
 def follow_user(request):

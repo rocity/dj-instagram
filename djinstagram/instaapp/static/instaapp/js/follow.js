@@ -15,7 +15,7 @@ $(document).ready(function() {
       dataType: 'json',
       type: 'post',
       success: function(data) {
-        console.log('data');
+        window.location.reload();
       }
     });
   });
