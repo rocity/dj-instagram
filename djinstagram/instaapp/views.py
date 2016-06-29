@@ -14,8 +14,11 @@ from .models import Follow, Photo
 def index(request):
     return render(request, 'instaapp/index.html', {})
 
-
 def feed(request):
+    """
+    View that displays the uploaded photos of users that the
+    `logged user` follows
+    """
     user = request.user
     photos = []
     user_following = Follow.objects.filter(follower__id=user.id)
@@ -55,6 +58,9 @@ def user_logout(request):
     return HttpResponseRedirect('/insta/login')
 
 def upload_photo(request):
+    """
+    Method that lets user upload an image
+    """
     uploader = request.user
     form = PhotoForm()
 
@@ -72,6 +78,9 @@ def upload_photo(request):
     return render(request, 'instaapp/upload_photo.html', {'form': form})
 
 def user_profile(request, username=None):
+    """
+    View to display the `logged user's` profile and uploaded photos
+    """
     if username is None:
         user = request.user
     else:
@@ -86,10 +95,16 @@ def user_profile(request, username=None):
         })
 
 def users(request):
+    """
+    View to display a list of all users registered to the app
+    """
     users = User.objects.all()
     return render(request, 'instaapp/users.html', {'users': users})
 
 def user_following(request):
+    """
+    View to display a list of users that the `logged user` is following
+    """
     user = request.user
 
     following = Follow.objects.filter(follower__pk=user.id)
@@ -99,6 +114,9 @@ def user_following(request):
         })
 
 def user_followers(request):
+    """
+    View to display a list of users who follow the `logged user`
+    """
     user = request.user
 
     followers = Follow.objects.filter(following__pk=user.id)
@@ -119,6 +137,9 @@ def user_followers(request):
         })
 
 def follow_user(request):
+    """
+    Method (AJAX) that makes the `logged user` follow the selected user
+    """
     data = {
         'status': 1,
         'follower': request.user.id,
