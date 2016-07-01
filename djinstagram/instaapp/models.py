@@ -43,5 +43,5 @@ class Like(models.Model):
         return self.photo
 
 class Member(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     image = models.ImageField(upload_to="uploads/dp", null=True)

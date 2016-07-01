@@ -6,8 +6,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 
-from .forms import LoginForm, PhotoForm
-from .models import Follow, Photo
+from .forms import LoginForm, PhotoForm, MemberPhotoForm
+from .models import Follow, Photo, Member
 
 # Create your views here.
 
@@ -81,17 +81,25 @@ def user_profile(request, username=None):
     """
     View to display the `logged user's` profile and uploaded photos
     """
+
+    upload_prof_pic_form = MemberPhotoForm()
+
     if username is None:
         user = request.user
+
     else:
         user = User.objects.get(username=username)
+
+    user_dp = Member.objects.filter(user=request.user)
 
     user_photos = Photo.objects.filter(owner__pk=user.id)
     photos_count = user_photos.count()
     return render(request, 'instaapp/profile.html', {
         'user': user,
+        'user_dp': user_dp,
         'photos': user_photos,
-        'count': photos_count
+        'count': photos_count,
+        'dp_form': upload_prof_pic_form
         })
 
 def users(request):
@@ -151,6 +159,27 @@ def follow_user(request):
 
         follow = Follow(follower=follower, following=following)
         follow.save()
+
+    data = json.dumps(data)
+    return HttpResponse(data, content_type='application/json')
+
+def upload_user_profile_pic(request):
+    """
+    Method (AJAX) that allows the `logged user` to upload a profile pic
+    """
+    uploader = request.user
+    data = {
+        'status': 0,
+    }
+
+    if request.method == 'POST':
+        form = MemberPhotoForm(request.POST, request.FILES)
+        if form.is_valid():
+            obj = form.save(commit=False)
+            obj.owner = uploader
+            obj.save()
+
+            data['status'] = 1
 
     data = json.dumps(data)
     return HttpResponse(data, content_type='application/json')

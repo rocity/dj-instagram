@@ -1,5 +1,5 @@
 from django import forms
-from .models import Photo
+from .models import Photo, Member
 
 class LoginForm(forms.Form):
     username = forms.CharField(widget=forms.TextInput(
@@ -23,3 +23,8 @@ class PhotoForm(forms.ModelForm):
                 'rows': 3
                 })
         }
+
+class MemberPhotoForm(forms.ModelForm):
+    class Meta:
+        model = Member
+        fields = ('image',)

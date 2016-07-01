@@ -5,7 +5,17 @@
     <div class="col-sm-6 col-sm-offset-3">
         <div class="row">
             <div class="col-sm-4">
-                <img src="https://www.wired.com/wp-content/uploads/2015/09/10093860866_803211264e_o.jpg" alt="profile image" class="img-responsive img-rounded">
+
+                {% if user_dp %}
+                    {{user_dp.image}}
+                {% endif %}
+                <form id="uploadDp" action="{% url 'instaapp:upload_user_profile_pic' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{dp_form}}
+                    <button type="submit" class="btn btn-primary">
+                        Upload
+                    </button>
+                </form>
             </div>
             <div class="col-sm-8">
                 <h1>@{{user.username}} <small>{{user.first_name}} {{user.last_name}}</small></h1>
@@ -24,3 +34,5 @@
 
 </div>
 {% include 'instaapp/includes/foot.html' %}
+<script src="{% static "instaapp/js/jquery.form.min.js" %}"></script>
+<script src="{% static "instaapp/js/profile.js" %}"></script>

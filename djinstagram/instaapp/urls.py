@@ -8,6 +8,8 @@ urlpatterns = [
     url(r'^login/$', views.user_login, name='user_login'),
     url(r'^logout/$', views.user_logout, name='user_logout'),
     url(r'^upload/$', views.upload_photo, name='upload_photo'),
+    url(r'^upload_dp/$', views.upload_user_profile_pic,
+        name='upload_user_profile_pic'),
     url(r'^users/$', views.users, name='users'),
     url(r'^u/(?P<username>[\w-]+)$', views.user_profile, name='user_view'),
     url(r'^profile/$', views.user_profile, name='user_profile'),
