@@ -23,3 +23,9 @@ footer {
 .panel.panel-post .panel-body img {
     width: 100%;
 }
+
+
+.img-avatar {
+  max-width: 50px;
+  max-height: 50px;
+}

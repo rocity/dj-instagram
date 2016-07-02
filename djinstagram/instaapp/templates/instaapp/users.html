@@ -6,10 +6,17 @@
         <h1>Users to Follow</h1>
         {% for user in users %}
             <div class="well user-card">
-                <img
-                    src="{% static "instaapp/img/50avatar.jpg" %}"
-                    alt="user avatar"
-                    class="responsive img-circle">
+                {% if user.user_dp %}
+                    <img
+                        src="{{ MEDIA_URL }}{{user.user_dp.image.url}}"
+                        alt="{{user.username}}"
+                        class="img-avatar img-thumbnail" />
+                {% else %}
+                    <img
+                        src="{% static "instaapp/img/profile-picture-placeholder.png" %}"
+                        alt="dp"
+                        class="img-avatar img-thumbnail">
+                {% endif %}
                 <span>
                     <strong>{{user.first_name}} {{user.last_name}}</strong> <small>@{{user.username}}</small>
                 </span>
