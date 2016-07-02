@@ -12,6 +12,8 @@ from .models import Follow, Photo, Member
 # Create your views here.
 
 def index(request):
+    if request.user.is_authenticated():
+        return HttpResponseRedirect('/insta/feed')
     return render(request, 'instaapp/index.html', {})
 
 def feed(request):
