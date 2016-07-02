@@ -155,16 +155,22 @@ def follow_user(request):
     Method (AJAX) that makes the `logged user` follow the selected user
     """
     data = {
-        'status': 1,
-        'follower': request.user.id,
-        'to_follow': request.POST['uid']
-    }
-    if request.method == 'POST':
-        follower = User.objects.get(pk=request.user.id)
-        following = User.objects.get(pk=request.POST['uid'])
+            'status': 0,
+        }
+    if request.user.is_authenticated():
+        if request.method == 'POST':
+            follower = User.objects.get(pk=request.user.id)
+            following = User.objects.get(pk=request.POST['uid'])
 
-        follow = Follow(follower=follower, following=following)
-        follow.save()
+            follow = Follow(follower=follower, following=following)
+            follow.save()
+
+            # data to be returned as json
+            data = {
+                'status': 1,
+                'follower': request.user.id,
+                'to_follow': request.POST['uid']
+            }
 
     data = json.dumps(data)
     return HttpResponse(data, content_type='application/json')

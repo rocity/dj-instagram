@@ -15,7 +15,11 @@ $(document).ready(function() {
       dataType: 'json',
       type: 'post',
       success: function(data) {
-        window.location.reload();
+        if (data.status == 1) {
+          window.location.reload();
+        } else {
+          $('#notLoggedInModal').modal('show');
+        }
       }
     });
   });

@@ -22,6 +22,17 @@
         {% endfor %}
     </div>
 
-</div>
+</div> <!-- / #content -->
+
+<div id="notLoggedInModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p>You are not logged in.</p>
+                <p>To follow this user, login <a href="{% url 'instaapp:user_login' %}">here</a></p>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 {% include 'instaapp/includes/foot.html' %}
 <script src="{% static "instaapp/js/follow.js" %}"></script>
