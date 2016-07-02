@@ -45,3 +45,7 @@ class Like(models.Model):
 class Member(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     image = models.ImageField(upload_to="uploads/dp", null=True)
+    modified = models.DateTimeField(auto_now=True, null=True)
+
+    def __str__(self):
+        return self.user.username

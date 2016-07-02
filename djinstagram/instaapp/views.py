@@ -94,7 +94,7 @@ def user_profile(request, username=None):
     else:
         user = User.objects.get(username=username)
 
-    dp_obj = Member.objects.filter(user__pk=user.id)
+    dp_obj = get_object_or_None(Member, user__pk=user.id)
     if dp_obj is None:
         user_dp = False
     else:
@@ -200,8 +200,16 @@ def upload_user_profile_pic(request):
     if request.method == 'POST':
         form = MemberPhotoForm(request.POST, request.FILES)
         if form.is_valid():
+
+            # check if user has already uploaded a profile picture
+            existing_dp = get_object_or_None(Member, user__pk=uploader.id)
+
             obj = form.save(commit=False)
             obj.user = uploader
+
+            if existing_dp is not None:
+                obj.id = existing_dp.id
+
             obj.save()
 
             data['status'] = 1
