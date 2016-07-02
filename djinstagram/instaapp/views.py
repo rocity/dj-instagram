@@ -90,7 +90,11 @@ def user_profile(request, username=None):
     else:
         user = User.objects.get(username=username)
 
-    user_dp = Member.objects.filter(user=request.user)
+    dp_obj = Member.objects.filter(user__pk=user.id)
+    if dp_obj is None:
+        user_dp = False
+    else:
+        user_dp = dp_obj
 
     user_photos = Photo.objects.filter(owner__pk=user.id)
     photos_count = user_photos.count()
@@ -168,15 +172,16 @@ def upload_user_profile_pic(request):
     Method (AJAX) that allows the `logged user` to upload a profile pic
     """
     uploader = request.user
+    form = MemberPhotoForm()
     data = {
-        'status': 0,
+        'status': uploader.username,
     }
 
     if request.method == 'POST':
         form = MemberPhotoForm(request.POST, request.FILES)
         if form.is_valid():
             obj = form.save(commit=False)
-            obj.owner = uploader
+            obj.user = uploader
             obj.save()
 
             data['status'] = 1
