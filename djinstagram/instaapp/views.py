@@ -118,15 +118,6 @@ def users(request):
     View to display a list of all users registered to the app
     """
     users = User.objects.all()[:10]
-    for user in users:
-        # dp_obj = Member.objects.filter(user__pk=user.id)
-        dp_obj = get_object_or_None(Member, user__pk=user.id)
-        if dp_obj is None:
-            user_dp = False
-        else:
-            user_dp = dp_obj
-
-        user.user_dp = user_dp
 
     return render(request, 'instaapp/users.html', {'users': users})
 
