@@ -119,6 +119,13 @@ def users(request):
     """
     users = User.objects.all()[:10]
 
+    for user in users:
+        queryset = Follow.objects.filter(
+                            follower__pk=request.user.id,
+                            following__pk=user.pk
+                            )
+        user.is_followed = get_object_or_None(queryset)
+
     return render(request, 'instaapp/users.html', {'users': users})
 
 def user_following(request):
