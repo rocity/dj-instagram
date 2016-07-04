@@ -144,20 +144,16 @@ def user_followers(request):
     """
     View to display a list of users who follow the `logged user`
     """
-    user = request.user
-
-    followers = Follow.objects.filter(following__pk=user.id)
+    followers = Follow.objects.filter(following__pk=request.user.id)
 
     # Check if you follow the users who follow you
-    for follow in followers:
-        following = Follow.objects.filter(
-            follower__pk=user.id,
-            following__pk=follow.pk)
+    for user in followers:
+        queryset = Follow.objects.filter(
+            follower__id=request.user.id,
+            following__id=user.follower.id
+            )
+        user.is_followed = get_object_or_None(queryset)
 
-        if following:
-            follow.mutual_follow = True
-        else:
-            follow.mutual_follow = False
 
     return render(request, 'instaapp/user_followers.html', {
         'followers': followers,
