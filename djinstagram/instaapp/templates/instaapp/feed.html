@@ -8,9 +8,20 @@
             {% for photo in photos %}
                 <div class="panel panel-default panel-post">
                     <div class="panel-heading">
-                        <img src="https://qph.is.quoracdn.net/main-thumb-7749827-50-wgtbetbrxruarmovvkasqtvgmlkuzbvk.jpeg" alt="avatar" class="img-circle">
+                        {% if photo.owner.member.image.url %}
+                            <img
+                                src="{{ MEDIA_URL }}{{photo.owner.member.image.url}}"
+                                alt="avatar"
+                                class="img-avatar img-thumbnail">
+                        {% else %}
+                            <img
+                                src="{% static "instaapp/img/profile-picture-placeholder.png" %}"
+                                alt="dp"
+                                class="img-avatar img-thumbnail">
+                        {% endif %}
                         <span class="panel-title">{{photo.owner.username}}</span>
                         <span class="pull-right">{{photo.created|timesince}}</span>
+                        <p>{{photo.member}}</p>
                     </div>
                     <div class="panel-body">
                         <img src="{{ MEDIA_URL }}{{photo.image.url}}" alt="post" />

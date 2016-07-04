@@ -28,7 +28,10 @@ def feed(request):
     user_following = Follow.objects.filter(follower__id=user.id)
 
     for user_object in user_following:
+
+
         following_photos = Photo.objects.filter(owner__id=user_object.following.id)
+
         if following_photos is not None:
             photos.append(following_photos)
 
