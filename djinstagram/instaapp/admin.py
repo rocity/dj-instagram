@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Photo, Like, Tag, Follow, Member
+from .models import Photo, Like, Tag, Follow, Member, Comment
 
 class PhotoAdmin(admin.ModelAdmin):
     '''
@@ -21,3 +21,4 @@ admin.site.register(Follow, FollowAdmin)
 admin.site.register(Like)
 admin.site.register(Tag)
 admin.site.register(Member)
+admin.site.register(Comment)
