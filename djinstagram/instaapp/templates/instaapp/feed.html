@@ -40,11 +40,22 @@
                             </span>
 
                             {# Comment text box #}
-                            <input
-                                type="text"
-                                class="form-control"
-                                placeholder="Say something..."
-                                aria-describedby="sizing-addon3" />
+                            <form
+                                method="post"
+                                action="{% url 'instaapp:post_photo_comment' %}"
+                                class="comment-form">
+                            {% csrf_token %}
+                                <input
+                                    type="hidden"
+                                    name="photo_id"
+                                    value="{{photo.id}}" />
+                                <input
+                                    name="comment_text"
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Say something..."
+                                    aria-describedby="sizing-addon3" />
+                            </form>
 
                             {# Options dropdown #}
                             <div class="input-group-btn">
@@ -65,7 +76,6 @@
                                     <li><a href="#">Separated link</a></li>
                                 </ul>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -81,3 +91,18 @@
 </div>
 {% include 'instaapp/includes/foot.html' %}
 <script src="{% static "instaapp/js/follow.js" %}"></script>
+<script src="{% static "instaapp/js/jquery.form.min.js" %}"></script>
+<script>
+
+    var comment_form_opts = {
+        success: comment_response
+    }
+    $('.comment-form').on('submit', function(e) {
+        console.log($(this));
+        $(this).ajaxSubmit(comment_form_opts);
+        return false;
+    });
+    function comment_response(responseText, statusText, xhr, $form) {
+        console.log(responseText);
+    }
+</script>

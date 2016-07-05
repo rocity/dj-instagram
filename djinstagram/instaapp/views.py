@@ -7,7 +7,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 
 from .forms import LoginForm, PhotoForm, MemberPhotoForm
-from .models import Follow, Photo, Member
+from .models import Follow, Photo, Member, Comment
 
 from annoying.functions import get_object_or_None
 
@@ -210,6 +210,21 @@ def upload_user_profile_pic(request):
             obj.save()
 
             data['status'] = 1
+
+    data = json.dumps(data)
+    return HttpResponse(data, content_type='application/json')
+
+def post_photo_comment(request):
+    data = {
+        'status': 0,
+    }
+
+    if request.user.is_authenticated() and request.method == 'POST':
+        post_data = request.POST
+        data = {
+            'post': post_data['photo_id'],
+            'comment': post_data['comment_text']
+        }
 
     data = json.dumps(data)
     return HttpResponse(data, content_type='application/json')
