@@ -39,3 +39,25 @@ a.navbar-brand {
   max-width: 50px;
   max-height: 50px;
 }
+
+.navbar,
+.navbar-collapse {
+  background-color: #fff;
+}
+
+.navbar {
+  border: none;
+}
+
+.panel-default .panel-heading {
+  color: #323133;
+  background-color: #F5F7FA;
+  border-color: #E6E9ED;
+}
+
+.panel-footer {
+    background-color: #F5F7FA;
+    border-top: 1px solid #E6E9ED;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+}

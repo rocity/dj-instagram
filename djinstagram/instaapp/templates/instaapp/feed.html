@@ -33,7 +33,40 @@
                             &nbsp;{{photo.caption}}
                         </p>
                         <hr />
-                        <span class="glyphicon glyphicon-heart"></span>&nbsp;Write a comment... <span class="pull-right glyphicon glyphicon-option-horizontal"></span>
+                        <div class="input-group input-group-sm">
+                            {# Like photo button #}
+                            <span class="input-group-addon" id="sizing-addon3">
+                                <span class="glyphicon glyphicon-heart"></span>
+                            </span>
+
+                            {# Comment text box #}
+                            <input
+                                type="text"
+                                class="form-control"
+                                placeholder="Say something..."
+                                aria-describedby="sizing-addon3" />
+
+                            {# Options dropdown #}
+                            <div class="input-group-btn">
+                                <button
+                                type="button"
+                                class="btn btn-default dropdown-toggle"
+                                data-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false">
+                                    <span
+                                    class="pull-right glyphicon glyphicon-option-horizontal"></span>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li><a href="#">Action</a></li>
+                                    <li><a href="#">Another action</a></li>
+                                    <li><a href="#">Something else here</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="#">Separated link</a></li>
+                                </ul>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
             {% endfor %}
