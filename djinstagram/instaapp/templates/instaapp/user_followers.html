@@ -12,7 +12,6 @@
                             <img class="img-circle" src="{% static "instaapp/img/30avatar.png" %}" alt="following avatar">
                             <span>{{user.follower}}</span>
                             <span class="text-danger">{{user.tae}}</span>
-                            {{user.is_followed}}
                             {% if user.is_followed %}
                                 <button class="btn btn-success pull-right disabled">
                                     <span class="glyphicon glyphicon-ok"></span>
