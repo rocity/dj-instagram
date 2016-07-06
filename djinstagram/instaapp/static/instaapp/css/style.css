@@ -65,3 +65,7 @@ a.navbar-brand {
 .photo-comment {
   margin-bottom: 0;
 }
+
+.like-button {
+  cursor: pointer;
+}

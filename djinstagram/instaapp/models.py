@@ -47,9 +47,6 @@ class Like(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 
-    def __str__(self):
-        return self.photo
-
 class Comment(models.Model):
     owner = models.ForeignKey(Member, null=True)
     photo = models.ForeignKey(Photo, null=True)

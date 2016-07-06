@@ -20,4 +20,5 @@ urlpatterns = [
         name='upload_user_profile_pic'),
     url(r'^follow/$', views.follow_user, name='follow_user'),
     url(r'^post_comment/$', views.post_photo_comment, name='post_photo_comment'),
+    url(r'^like_comment/$', views.like_photo, name='like_photo'),
 ]

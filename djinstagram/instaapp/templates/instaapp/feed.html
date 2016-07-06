@@ -27,7 +27,7 @@
                         <img src="{{ MEDIA_URL }}{{photo.image.url}}" alt="post" />
                     </div>
                     <div class="panel-footer">
-                        <p><strong>999</strong> likes</p>
+                        <p><strong>{{photo.like_set.all.count}}</strong> likes</p>
                         <p>
                             <strong>{{photo.owner.username}}</strong>
                             &nbsp;{{photo.caption}}
@@ -41,7 +41,10 @@
                         <hr />
                         <div class="input-group input-group-sm">
                             {# Like photo button #}
-                            <span class="input-group-addon" id="sizing-addon3">
+                            <span
+                                data-pid="{{photo.id}}"
+                                data-url="{% url 'instaapp:like_photo' %}"
+                                class="input-group-addon like-button">
                                 <span class="glyphicon glyphicon-heart"></span>
                             </span>
 
@@ -97,4 +100,4 @@
 </div>
 {% include 'instaapp/includes/foot.html' %}
 <script src="{% static "instaapp/js/jquery.form.min.js" %}"></script>
-<script src="{% static "instaapp/js/photo-comment.js" %}"></script>
+<script src="{% static "instaapp/js/photo-user-actions.js" %}"></script>

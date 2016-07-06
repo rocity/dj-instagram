@@ -7,7 +7,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 
 from .forms import LoginForm, PhotoForm, MemberPhotoForm
-from .models import Follow, Photo, Member, Comment
+from .models import Follow, Photo, Member, Comment, Like
 
 from annoying.functions import get_object_or_None
 
@@ -214,7 +214,7 @@ def upload_user_profile_pic(request):
 
 def post_photo_comment(request):
     data = {
-        'status': 0,
+        'status': 0
     }
 
     if request.user.is_authenticated() and request.method == 'POST':
@@ -227,6 +227,27 @@ def post_photo_comment(request):
             text=post_data['comment_text']
             )
         resp = comment.save()
+        if resp:
+            data['status'] = 1
+
+    data = json.dumps(data)
+    return HttpResponse(data, content_type='application/json')
+
+def like_photo(request):
+    data = {
+        'status': 0
+    }
+
+    # TODO: Check if like already exists
+    if request.user.is_authenticated() and request.method == 'POST':
+        post_data = request.POST
+
+        photo = get_object_or_None(Photo, pk=post_data['photo_id'])
+        like = Like(
+            owner=request.user.member,
+            photo=photo,
+            )
+        resp = like.save()
         if resp:
             data['status'] = 1
 
