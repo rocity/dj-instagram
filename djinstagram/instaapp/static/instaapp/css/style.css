@@ -61,3 +61,7 @@ a.navbar-brand {
     border-bottom-right-radius: 3px;
     border-bottom-left-radius: 3px;
 }
+
+.photo-comment {
+  margin-bottom: 0;
+}

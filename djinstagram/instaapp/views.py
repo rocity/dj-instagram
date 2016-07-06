@@ -28,8 +28,6 @@ def feed(request):
     user_following = Follow.objects.filter(follower__id=user.id)
 
     for user_object in user_following:
-
-
         following_photos = Photo.objects.filter(owner__id=user_object.following.id)
 
         if following_photos is not None:
@@ -221,10 +219,16 @@ def post_photo_comment(request):
 
     if request.user.is_authenticated() and request.method == 'POST':
         post_data = request.POST
-        data = {
-            'post': post_data['photo_id'],
-            'comment': post_data['comment_text']
-        }
+
+        photo = get_object_or_None(Photo, pk=post_data['photo_id'])
+        comment = Comment(
+            owner=request.user.member,
+            photo=photo,
+            text=post_data['comment_text']
+            )
+        resp = comment.save()
+        if resp:
+            data['status'] = 1
 
     data = json.dumps(data)
     return HttpResponse(data, content_type='application/json')

@@ -32,6 +32,12 @@
                             <strong>{{photo.owner.username}}</strong>
                             &nbsp;{{photo.caption}}
                         </p>
+                        {% for comment in photo.comment_set.all %}
+                            <p class="photo-comment">
+                                <strong>{{comment.owner}}</strong>
+                                &nbsp;{{comment.text}}
+                            </p>
+                        {% endfor %}
                         <hr />
                         <div class="input-group input-group-sm">
                             {# Like photo button #}
@@ -90,19 +96,5 @@
 
 </div>
 {% include 'instaapp/includes/foot.html' %}
-<script src="{% static "instaapp/js/follow.js" %}"></script>
 <script src="{% static "instaapp/js/jquery.form.min.js" %}"></script>
-<script>
-
-    var comment_form_opts = {
-        success: comment_response
-    }
-    $('.comment-form').on('submit', function(e) {
-        console.log($(this));
-        $(this).ajaxSubmit(comment_form_opts);
-        return false;
-    });
-    function comment_response(responseText, statusText, xhr, $form) {
-        console.log(responseText);
-    }
-</script>
+<script src="{% static "instaapp/js/photo-comment.js" %}"></script>
