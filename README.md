@@ -1,9 +1,15 @@
 # Django Instagram
 
-Django Development Practice - Instagram Clone
+An Instagram clone built with Django
 
-- Django 1.9
-- [Schema](https://github.com/Vheissu/Open-Source-Database-Schemas/blob/master/vheissu-instagram-schema.md)
+# Design
+- [Schema reference](https://github.com/Vheissu/Open-Source-Database-Schemas/blob/master/vheissu-instagram-schema.md)
+
+# Install
+- Clone this repo
+- Activate your virtualenv
+- Navigate to this project's directory in your computer
+- run `pip install -r requirements.txt`
 
 # Licensing
 
