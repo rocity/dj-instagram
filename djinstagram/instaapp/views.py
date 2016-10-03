@@ -115,6 +115,7 @@ def users(request):
     """
     View to display a list of all users registered to the app
     """
+    userlist = []
     users = User.objects.all()[:10]
 
     for user in users:
@@ -122,9 +123,12 @@ def users(request):
                             follower__pk=request.user.id,
                             following__pk=user.pk
                             )
-        user.is_followed = get_object_or_None(queryset)
+        follow_status = get_object_or_None(queryset)
 
-    return render(request, 'instaapp/users.html', {'users': users})
+        if follow_status is None:
+            userlist.append(user)
+
+    return render(request, 'instaapp/users.html', {'users': userlist})
 
 def user_following(request):
     """
