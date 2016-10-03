@@ -5,6 +5,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
 from .forms import LoginForm, PhotoForm, MemberPhotoForm
 from .models import Follow, Photo, Member, Comment, Like
@@ -130,6 +131,7 @@ def users(request):
 
     return render(request, 'instaapp/users.html', {'users': userlist})
 
+@login_required
 def user_following(request):
     """
     View to display a list of users that the `logged user` is following
@@ -142,6 +144,7 @@ def user_following(request):
         'following': following
         })
 
+@login_required
 def user_followers(request):
     """
     View to display a list of users who follow the `logged user`
