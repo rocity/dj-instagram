@@ -20,6 +20,7 @@ urlpatterns = [
     url(r'^upload_dp/$', ajax.upload_user_profile_pic,
         name='upload_user_profile_pic'),
     url(r'^follow/$', ajax.follow_user, name='follow_user'),
+    url(r'^unfollow/$', ajax.unfollow_user, name='unfollow_user'),
     url(r'^post_comment/$', ajax.post_photo_comment, name='post_photo_comment'),
     url(r'^like_comment/$', ajax.like_photo, name='like_photo'),
 ]

@@ -6,7 +6,6 @@ import json, itertools
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 
-from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
@@ -38,6 +37,35 @@ def follow_user(request):
                 'follower': request.user.id,
                 'to_follow': request.POST['uid']
             }
+
+    data = json.dumps(data)
+    return HttpResponse(data, content_type='application/json')
+
+def unfollow_user(request):
+    """
+    Method (AJAX) that makes the `logged user` to unfollow a selected user
+    """
+    data = {
+        'status': 0,
+    }
+    if request.user.is_authenticated():
+        if request.method == 'POST':
+            # check if logged user is following the selected user
+            follower = User.objects.get(pk=request.user.id)
+            following = User.objects.get(pk=request.POST['uid'])
+
+            follow_obj = get_object_or_None(Follow,
+                                    follower=follower,
+                                    following=following
+                                    )
+
+            # if is following, update `active` field to False
+            if follow_obj is not None:
+                follow_obj.active = False
+                resp = follow_obj.save()
+                # after a successful unfollow, update `data` variable's status to 1
+                if resp:
+                    data['status'] = 1
 
     data = json.dumps(data)
     return HttpResponse(data, content_type='application/json')

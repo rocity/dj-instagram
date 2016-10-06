@@ -55,6 +55,30 @@ $(document).ready(function() {
     }
   }
 
-  $('.btn-following').hover(followingHoverIn, followingHoverOut);
+  function followingClick(e) {
+    e.preventDefault();
+
+    var t = $(this),
+    user_to_unfollow = t.data('user');
+
+    $.ajax({
+      url: '/insta/unfollow/',
+      data: {uid: user_to_unfollow},
+      dataType: 'json',
+      type: 'post',
+      success: function(data) {
+        if (data.status == 1) {
+          window.location.reload();
+        } else {
+          $('#notLoggedInModal').modal('show');
+        }
+      }
+    });
+  }
+
+  $('.btn-following')
+                    .hover(followingHoverIn, followingHoverOut)
+                    .click(followingClick);
+
 
 }); // document ready
