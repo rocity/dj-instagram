@@ -125,7 +125,8 @@ def users(request):
     for user in users:
         queryset = Follow.objects.filter(
                             follower__pk=request.user.id,
-                            following__pk=user.pk
+                            following__pk=user.pk,
+                            active=True
                             )
         follow_status = get_object_or_None(queryset)
 
@@ -141,7 +142,7 @@ def user_following(request):
     """
     user = request.user
 
-    following = Follow.objects.filter(follower__pk=user.id)
+    following = Follow.objects.filter(follower__pk=user.id, active=True)
 
     return render(request, 'instaapp/user_following.html', {
         'following': following

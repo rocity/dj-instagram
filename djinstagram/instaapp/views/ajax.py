@@ -56,7 +56,8 @@ def unfollow_user(request):
 
             follow_obj = get_object_or_None(Follow,
                                     follower=follower,
-                                    following=following
+                                    following=following,
+                                    active=True
                                     )
 
             # if is following, update `active` field to False
