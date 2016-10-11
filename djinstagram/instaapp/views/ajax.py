@@ -65,8 +65,7 @@ def unfollow_user(request):
                 follow_obj.active = False
                 resp = follow_obj.save()
                 # after a successful unfollow, update `data` variable's status to 1
-                if resp:
-                    data['status'] = 1
+                data['status'] = 1
 
     data = json.dumps(data)
     return HttpResponse(data, content_type='application/json')
@@ -116,8 +115,7 @@ def post_photo_comment(request):
             text=post_data['comment_text']
             )
         resp = comment.save()
-        if resp:
-            data['status'] = 1
+        data['status'] = 1
 
     data = json.dumps(data)
     return HttpResponse(data, content_type='application/json')
@@ -137,8 +135,7 @@ def like_photo(request):
             photo=photo,
             )
         resp = like.save()
-        if resp:
-            data['status'] = 1
+        data['status'] = 1
 
     data = json.dumps(data)
     return HttpResponse(data, content_type='application/json')
