@@ -130,12 +130,19 @@ def like_photo(request):
         post_data = request.POST
 
         photo = get_object_or_None(Photo, pk=post_data['photo_id'])
-        like = Like(
+
+        check_like = get_object_or_None(Like,
             owner=request.user.member,
-            photo=photo,
+            photo=photo
             )
-        resp = like.save()
-        data['status'] = 1
+
+        if check_like is None:
+            like = Like(
+                owner=request.user.member,
+                photo=photo,
+                )
+            like.save()
+            data['status'] = 1
 
     data = json.dumps(data)
     return HttpResponse(data, content_type='application/json')
