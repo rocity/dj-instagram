@@ -16,9 +16,7 @@ $(document).ready(function() {
         var t = $(this),
             pid = t.data('pid'),
             req_url = t.data('url');
-        console.log('liking ' + pid);
-        console.log('req ' + req_url);
-        t.css('color', '#BF263C');
+        t.addClass('liked_photo');
 
         $.ajax({
             data: {

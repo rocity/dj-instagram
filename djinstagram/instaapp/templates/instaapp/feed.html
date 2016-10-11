@@ -41,10 +41,16 @@
                         <hr />
                         <div class="input-group input-group-sm">
                             {# Like photo button #}
+
                             <span
                                 data-pid="{{photo.id}}"
                                 data-url="{% url 'instaapp:like_photo' %}"
-                                class="input-group-addon like-button">
+                                {% if photo.pk in liked_photos %}
+                                    class="input-group-addon like-button liked_photo"
+                                {% else %}
+                                    class="input-group-addon like-button"
+                                {% endif %}
+                                >
                                 <span class="glyphicon glyphicon-heart"></span>
                             </span>
 

@@ -22,6 +22,7 @@ def index(request):
         return HttpResponseRedirect('/insta/feed')
     return render(request, 'instaapp/index.html', {})
 
+@login_required
 def feed(request):
     """
     View that displays the uploaded photos of users that the
@@ -29,6 +30,7 @@ def feed(request):
     """
     user = request.user
     photos = []
+    liked_photos = []
     user_following = Follow.objects.filter(follower__id=user.id)
 
     for user_object in user_following:
@@ -40,9 +42,17 @@ def feed(request):
     # flatten list of photos
     chain = itertools.chain(*photos)
     photos = list(chain)
+    for photo in photos:
+        photo_like = get_object_or_None(Like,
+            owner=user.member,
+            photo=photo
+            )
+        if photo_like:
+            liked_photos.append(photo.pk)
 
     return render(request, 'instaapp/feed.html', {
-        'photos': photos
+        'photos': photos,
+        'liked_photos': liked_photos
         })
 
 def user_login(request):
@@ -66,6 +76,7 @@ def user_logout(request):
     logout(request)
     return HttpResponseRedirect('/insta/login')
 
+@login_required
 def upload_photo(request):
     """
     Method that lets user upload an image
@@ -86,6 +97,7 @@ def upload_photo(request):
 
     return render(request, 'instaapp/upload_photo.html', {'form': form})
 
+@login_required
 def user_profile(request, username=None):
     """
     View to display the `logged user's` profile and uploaded photos

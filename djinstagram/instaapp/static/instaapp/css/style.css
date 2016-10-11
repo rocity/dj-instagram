@@ -69,3 +69,7 @@ a.navbar-brand {
 .like-button {
   cursor: pointer;
 }
+
+.liked_photo {
+  color: #BF263C;
+}
