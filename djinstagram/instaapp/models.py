@@ -33,6 +33,12 @@ class Photo(models.Model):
     def __str__(self):
         return self.caption
 
+    def image_tag(self):
+        return u'<img src="%s" />' % self.image.url
+
+    image_tag.short_description = 'Image Preview'
+    image_tag.allow_tags = True
+
 class Member(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     image = models.ImageField(upload_to="uploads/dp", null=True)
@@ -46,6 +52,12 @@ class Like(models.Model):
     photo = models.ForeignKey(Photo, null=True)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
+
+    def image_tag(self):
+        return u'<img src="%s" />' % self.photo.image.url
+
+    image_tag.short_description = 'Image with tags'
+    image_tag.allow_tags = True
 
 class Comment(models.Model):
     owner = models.ForeignKey(Member, null=True)
