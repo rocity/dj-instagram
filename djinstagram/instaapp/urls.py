@@ -15,6 +15,7 @@ urlpatterns = [
     url(r'^following/$', general.user_following, name='user_following'),
     url(r'^followers/$', general.user_followers, name='user_followers'),
     url(r'^feed/$', general.feed, name='feed'),
+    url(r'^search/$', general.search, name='user_search'),
 
     # AJAX methods
     url(r'^upload_dp/$', ajax.upload_user_profile_pic,

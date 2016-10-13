@@ -180,4 +180,23 @@ def user_followers(request):
         'followers': followers,
         })
 
+def search(request):
+    query = request.GET.get('q', '')
 
+    userlist = []
+    results = User.objects.filter(username__contains=query)
+
+    # Check follow status on a result
+    if request.user.is_authenticated():
+        for user in results:
+            queryset = Follow.objects.filter(
+                                follower__pk=request.user.id,
+                                following__pk=user.pk,
+                                active=True
+                                )
+            follow_status = get_object_or_None(queryset)
+
+            if follow_status is None:
+                userlist.append(user)
+
+    return render(request, 'instaapp/search.html', {'results': results})
