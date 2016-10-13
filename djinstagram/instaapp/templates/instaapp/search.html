@@ -21,7 +21,7 @@
                     <strong>{{user.first_name}} {{user.last_name}}</strong> <small>@{{user.username}}</small>
                 </span>
 
-                {% if user.is_followed %}
+                {% if user.id in followlist %}
                     <button class="btn btn-success disabled pull-right">
                         <span class="glyphicon glyphicon-ok"></span>
                         Followed

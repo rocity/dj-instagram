@@ -183,7 +183,7 @@ def user_followers(request):
 def search(request):
     query = request.GET.get('q', '')
 
-    userlist = []
+    followlist = []
     results = User.objects.filter(username__contains=query)
 
     # Check follow status on a result
@@ -196,7 +196,10 @@ def search(request):
                                 )
             follow_status = get_object_or_None(queryset)
 
-            if follow_status is None:
-                userlist.append(user)
+            if follow_status is not None:
+                followlist.append(user.id)
 
-    return render(request, 'instaapp/search.html', {'results': results})
+    return render(request, 'instaapp/search.html', {
+        'results': results,
+        'followlist': followlist
+        })
