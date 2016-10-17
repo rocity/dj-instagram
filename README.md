@@ -4,6 +4,7 @@ An Instagram clone built with Django
 
 # Design
 - [Schema reference](https://github.com/Vheissu/Open-Source-Database-Schemas/blob/master/vheissu-instagram-schema.md)
+- [Roadmap/Tasks](https://github.com/rocity/dj-instagram/projects/1)
 
 # Install
 - Clone this repo
