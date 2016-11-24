@@ -1,3 +1,5 @@
+![djinsta logo][./docs/assets/img/logo.png]
+
 # Django Instagram
 
 An Instagram clone built with Django
@@ -10,8 +12,13 @@ An Instagram clone built with Django
 - Clone this repo
 - Activate your virtualenv
 - Navigate to this project's directory in your computer
-- run `pip install -r requirements.txt`
+- Install requirements
+    - `$ pip install -r requirements.txt`
+- Update your database
+    - `$ python manage.py migrate`
+- You're all set!
+    - `$ python manage.py runserver`
 
 # Licensing
 
-dj-instagram is licensed under the Apache License, Version 2.0. See LICENSE.txt for the full license text.
+This software is licensed under the Apache License, Version 2.0. See [LICENSE](./LICENSE) for the full license text.
