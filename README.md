@@ -1,4 +1,4 @@
-![djinsta logo][./docs/assets/img/logo.png]
+![djinsta logo](./docs/assets/img/logo.png)
 
 # Django Instagram
 
